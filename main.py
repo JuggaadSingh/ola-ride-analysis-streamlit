@@ -144,7 +144,7 @@ elif menu == "Ratings":
     st.header("⭐ Ratings Analysis")
 
     # Remove null ratings
-    ratings_df = df.dropna(subset=["Driver_Ratings", "Customer_Ratings"])
+    ratings_df = df.dropna(subset=["Driver_Ratings", "Customer_Rating"])
 
     col1, col2 = st.columns(2)
 
@@ -157,7 +157,7 @@ elif menu == "Ratings":
     with col2:
         st.metric(
             "Average Customer Rating",
-            round(ratings_df["Customer_Ratings"].mean(), 2)
+            round(ratings_df["Customer_Rating"].mean(), 2)
         )
 
     st.subheader("📊 Driver Ratings Distribution")
@@ -165,7 +165,7 @@ elif menu == "Ratings":
 
     st.subheader("📊 Customer Ratings by Vehicle Type")
     avg_customer_rating = (
-        ratings_df.groupby("Vehicle_Type")["Customer_Ratings"]
+        ratings_df.groupby("Vehicle_Type")["Customer_Rating"]
         .mean()
         .sort_values(ascending=False)
     )
@@ -173,5 +173,5 @@ elif menu == "Ratings":
 
     st.subheader("🔍 Customer vs Driver Ratings Relationship")
     st.scatter_chart(
-        ratings_df[["Customer_Ratings", "Driver_Ratings"]]
+        ratings_df[["Customer_Rating", "Driver_Ratings"]]
     )
